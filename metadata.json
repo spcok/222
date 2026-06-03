@@ -1,0 +1,6 @@
+{
+  "name": "Router and Database Workspace",
+  "description": "An interactive workspace populated with TanStack Router, TanStack Query, Supabase, and Drizzle ORM.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
