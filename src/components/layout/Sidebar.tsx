@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useRouter } from '@tanstack/react-router';
-import { useAuth } from '../../lib/auth';
+import { Link } from '@tanstack/react-router';
+import { useAuth } from '../lib/auth';
 import { 
   LayoutDashboard, PawPrint, Stethoscope, ClipboardList, ShieldAlert,
   CalendarDays, Apple, Syringe, Activity, BriefcaseMedical, AlertTriangle, 
@@ -105,7 +105,7 @@ function NavGroup({ group }: NavGroupProps) {
   );
 }
 
-export function Sidebar() {
+export function Sidebar({ isOpen }: { isOpen: boolean }) {
   const { session, logout } = useAuth();
 
   const handleSignOut = async () => {
@@ -113,41 +113,44 @@ export function Sidebar() {
   };
 
   return (
-    <div className="w-64 bg-[#0F1117] border-r border-slate-800/80 flex flex-col h-full shrink-0">
-      <div className="h-16 flex items-center px-6 border-b border-slate-800/80 shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#0A0B0E] border border-slate-800/80 flex items-center justify-center shadow-inner">
-            <PawPrint size={16} className="text-emerald-500" />
+    <div className={`transition-all duration-300 shrink-0 ${isOpen ? 'w-64' : 'w-0'}`}>
+      <div className="w-64 bg-[#0F1117] border-r border-slate-800/80 flex flex-col h-full overflow-hidden">
+        <div className="h-16 flex items-center px-6 border-b border-slate-800/80 shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-[#0A0B0E] border border-slate-800/80 flex items-center justify-center shadow-inner">
+              <PawPrint size={16} className="text-emerald-500" />
+            </div>
+            <span className="font-black text-white tracking-tight uppercase">Strix<span className="text-emerald-500">OS</span></span>
           </div>
-          <span className="font-black text-white tracking-tight uppercase">Strix<span className="text-emerald-500">OS</span></span>
         </div>
-      </div>
-      <nav className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-        <Link
-          to="/"
-          className="flex items-center gap-3 px-3 py-2.5 mb-6 rounded-xl text-sm font-bold text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors group [&.active]:bg-emerald-500/10 [&.active]:text-emerald-400"
-          activeOptions={{ exact: true }}
-        >
-          <LayoutDashboard size={18} className="shrink-0 transition-colors group-[&.active]:text-emerald-400" />
-          Dashboard
-        </Link>
         
-        {navGroups.map((group) => (
-          <NavGroup key={group.title} group={group} />
-        ))}
-      </nav>
-
-      {session && (
-        <div className="p-4 border-t border-slate-800/80 shrink-0">
-          <button 
-            onClick={handleSignOut}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-rose-400 hover:bg-rose-50 border border-transparent hover:border-rose-500/10 transition-all"
+        <nav className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+          <Link
+            to="/"
+            className="flex items-center gap-3 px-3 py-2.5 mb-6 rounded-xl text-sm font-bold text-slate-400 hover:text-white hover:bg-slate-800/50 transition-colors group [&.active]:bg-emerald-500/10 [&.active]:text-emerald-400"
+            activeOptions={{ exact: true }}
           >
-            <LogOut size={16} className="shrink-0" />
-            Sign Out
-          </button>
-        </div>
-      )}
+            <LayoutDashboard size={18} className="shrink-0 transition-colors group-[&.active]:text-emerald-400" />
+            Dashboard
+          </Link>
+          
+          {navGroups.map((group) => (
+            <NavGroup key={group.title} group={group} />
+          ))}
+        </nav>
+
+        {session && (
+          <div className="p-4 border-t border-slate-800/80 shrink-0">
+            <button 
+              onClick={handleSignOut}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest text-slate-500 hover:text-rose-400 hover:bg-rose-50 border border-transparent hover:border-rose-500/10 transition-all"
+            >
+              <LogOut size={16} className="shrink-0" />
+              Sign Out
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
