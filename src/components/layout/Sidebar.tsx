@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from '@tanstack/react-router';
-import { useAuth } from '../lib/auth';
+import { useAuth } from '../../lib/auth';
 import { 
   LayoutDashboard, PawPrint, Stethoscope, ClipboardList, ShieldAlert,
   CalendarDays, Apple, Syringe, Activity, BriefcaseMedical, AlertTriangle, 

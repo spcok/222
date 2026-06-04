@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Menu, Play, Square, Loader2 } from 'lucide-react';
-import { useAuth } from '../lib/auth'; // Rewired to our local Auth Engine
+import { useAuth } from '../../lib/auth';
 import { useQuery } from '@tanstack/react-query';
-import { timesheetService } from '../services/timesheetService';
-import { useOutboxStore } from '../store/outboxStore';
+import { timesheetService } from '../../services/timesheetService';
+import { useOutboxStore } from '../../store/outboxStore';
 
 interface HeaderProps {
   toggleSidebar: () => void;
